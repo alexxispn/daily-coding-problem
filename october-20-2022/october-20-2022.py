@@ -1,4 +1,5 @@
 numbers: list = [10, 15, 3, 7]
 k: int = 17
 
-print([number for number in numbers if k - number in numbers] != [])
+result = any(k - number in numbers for number in numbers)
+print(result)
