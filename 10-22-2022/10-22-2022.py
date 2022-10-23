@@ -11,13 +11,13 @@ def serialize(node: Node) -> str:
     return f"{node.val} {serialize(node.left)} {serialize(node.right)}"
 
 
-def deserialize(directories: str) -> Node or None:
-    if directories == 'None':
+def deserialize(serialized: str) -> Node or None:
+    if serialized == 'None':
         return None
-    directories = directories.split()
+    serialized = serialized.split()
 
     def _deserialize():
-        val = directories.pop(0)
+        val = serialized.pop(0)
         if val == 'None':
             return None
         return Node(val, _deserialize(), _deserialize())

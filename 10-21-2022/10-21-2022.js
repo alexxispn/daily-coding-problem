@@ -1,6 +1,7 @@
 "use strict";
 (() => {
     const numbers = [1, 2, 3, 4, 5];
+    // Without using division
     const getProductNumbers = (numbers) => {
         let productNumbers = [];
         for (let number of numbers) {
