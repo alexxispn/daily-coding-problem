@@ -7,22 +7,20 @@ class Node:
 
 def serialize(node: Node) -> str:
     if node is None:
-        return 'None'
+        return 'X'
     return f"{node.val} {serialize(node.left)} {serialize(node.right)}"
 
 
 def deserialize(serialized: str) -> Node or None:
-    if serialized == 'None':
-        return None
-    serialized = serialized.split()
+    nodes = serialized.split()
 
-    def _deserialize():
-        val = serialized.pop(0)
-        if val == 'None':
+    def generate_node() -> Node or None:
+        val = nodes.pop(0)
+        if val == 'X':
             return None
-        return Node(val, _deserialize(), _deserialize())
+        return Node(val, generate_node(), generate_node())
 
-    return _deserialize()
+    return generate_node()
 
 
 node = Node('root', Node('left', Node('left.left')), Node('right'))
