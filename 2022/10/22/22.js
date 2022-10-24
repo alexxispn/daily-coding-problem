@@ -2,13 +2,10 @@
 (() => {
     var _a, _b, _c, _d, _e;
     class Node {
-        constructor(val, left = null, right = null) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-            this.val = val;
-            this.left = left;
-            this.right = right;
+        constructor(props) {
+            this.val = props.val;
+            this.left = props.left;
+            this.right = props.right;
         }
     }
     const serialize = (node) => {
@@ -22,11 +19,19 @@
             const val = nodes.shift();
             if (val === 'X')
                 return null;
-            return new Node(val, buildNode(), buildNode());
+            return new Node({
+                val,
+                left: buildNode(),
+                right: buildNode(),
+            });
         };
         return buildNode();
     };
-    const node = new Node('root', new Node('left', new Node('left.left')), new Node('right'));
+    const node = new Node({
+        val: 'root',
+        right: new Node({ val: 'right' }),
+        left: new Node({ val: 'left', left: new Node({ val: 'left.left' }) }),
+    });
     console.log(serialize(node));
     console.log(deserialize(serialize(node)));
     console.log((_b = (_a = node.left) === null || _a === void 0 ? void 0 : _a.left) === null || _b === void 0 ? void 0 : _b.val);

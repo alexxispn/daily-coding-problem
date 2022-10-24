@@ -1,13 +1,20 @@
 (() => {
+
+    interface NodeProps {
+        val: string;
+        left: NodeProps | null;
+        right: NodeProps | null;
+    }
+
     class Node {
-        constructor(
-            public val: string,
-            public left: Node | null = null,
-            public right: Node | null = null
-        ) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
+        public val: string;
+        public left: NodeProps | null;
+        public right: NodeProps | null;
+
+        constructor(props: NodeProps) {
+            this.val = props.val;
+            this.left = props.left;
+            this.right = props.right;
         }
     }
 
@@ -21,12 +28,21 @@
         const buildNode = (): Node | null => {
             const val = nodes.shift();
             if (val === 'X') return null;
-            return new Node(val as string, buildNode(), buildNode());
+            return new Node({
+                val,
+                left: buildNode(),
+                right: buildNode(),
+            } as NodeProps);
         };
         return buildNode();
     }
 
-    const node = new Node('root', new Node('left', new Node('left.left')), new Node('right'));
+    const node = new Node({
+        val: 'root',
+        right: new Node({val: 'right'} as NodeProps),
+        left: new Node({val: 'left', left: new Node({val: 'left.left'} as NodeProps)} as NodeProps),
+    });
+
     console.log(serialize(node));
     console.log(deserialize(serialize(node)));
     console.log(node.left?.left?.val);
