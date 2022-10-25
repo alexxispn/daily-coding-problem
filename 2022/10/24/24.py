@@ -4,6 +4,7 @@ def cons(a, b):
 
     return pair
 
+
 def car(pair):
     def first(a, b):
         return a
