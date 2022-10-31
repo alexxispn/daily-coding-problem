@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+
 import calendar
 import os
+
 
 extensions = ['.md', '.py', '.ts']
 
