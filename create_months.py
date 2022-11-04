@@ -4,7 +4,7 @@ import calendar
 import os
 from sys import argv
 
-extensions = ['.md', '.py', '.ts']
+extensions = ['.py', '.ts']
 
 
 def get_md_content(day, month, year):
@@ -21,8 +21,9 @@ def create_month(month, year):  # 11, 2022
         os.mkdir(str(day))
         os.chdir(str(day))
         for extension in extensions:
-            with open(f'{day}{extension}', 'w') as f:
-                f.write(get_md_content(day, month, year))
+            open(f'{day}{extension}', 'w').close()
+        with open('README.md', 'w') as f:
+            f.write(get_md_content(day, month, year))
         os.chdir('..')
     os.chdir('..')
 
