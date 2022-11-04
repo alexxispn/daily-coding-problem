@@ -1,1 +1,3 @@
-# 08 November
+# 08 November 2022 
+
+> :bulb:️ **Kata Description**
